@@ -13,29 +13,21 @@
     </head>
     
     <body>
-        <div class="container 
-                    container-login
-                    col-sm-9 
-                    col-md-7 
-                    col-lg-6">
-                
-            <form method="post" action="#">
-                <span class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="txt_nickname">Usuário:</label>
-                    <input class="form-control col-sm-10" type="text" id="txt_nickname">
-                </span>
-                
-                <span class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="txt_senha">Senha:</label>
-                    <input class="form-control col-sm-10" type="password" id="txt_senha">
-                </span>
-                
-                <span class="form-group row float-right">
-                    <input class="btn btn-success" type="submit" value="Logar">
-                </span>
-                <span class="clearfix"></span>
-            </form>
-            
+        <div class="container col-sm-4">
+                <form class="margin-top">
+                    <div class="form-group">
+                        <label class="control-label" for="txt_nickname">Usuário:</label>
+                        <input class="form-control" type="text" id="txt_nickname">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label" for="txt_senha">Senha:</label>
+                        <input class="form-control" type="password" id="txt_senha">  
+                    </div> 
+                    
+                    <input class="btn btn-primary btn-block" type="submit" value="Enviar">
+                </form>
         </div>
     </body>
 </html>

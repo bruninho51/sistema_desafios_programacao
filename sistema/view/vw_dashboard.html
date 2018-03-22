@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <!--BOOTSTRAP CDN-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <!--CSS DO PROJETO-->
+        <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/dashboard.css">
+    </head>
+    
+    <body>
+        <div class="container col-sm-4">
+            <div class="container-enviar-enunciado">
+                <p id="desafio_enunciado">ENUNCIADO</p>
+
+                <form method="post" action="#">
+                    <!--CONTROLFILE PERSONALIZADO-->
+                    <span class="form-custom-control-file">
+                        <button class='btn-control-file btn btn-primary btn-block' onclick="document.getElementById('files').click()">
+                            Clique para escolher arquivo
+                            <!--<input type='file' name="file" id="file" value=''>-->
+                            <input type="file" id="files" name="files[]">
+                            <output id="list"></output>
+
+                        </button>
+                            <small id="nome_arquivo">nome do arquivo..</small>
+                    </span>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Resposta</button>
+                </form>
+                
+            </div>
+            
+        </div>
+        
+        <script>
+            // Verifica se as APIs de arquivo são suportadas pelo navegador.
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+              // Todas as APIs são suportadas!
+            } else {
+              alert('A APIs de arquivos não é totalmente suportada neste navegador.');
+            }
+
+
+            function handleFileSelect(evt) {
+              var files = evt.target.files; // Objeto FileList guarda todos os arquivos.
+              var output = [];
+              //Intera sobre os arquivos e lista esses objetos no output.
+              for (var i = 0, f; f = files[i]; i++) {
+            //        console.log('Objeto do arquivo', f);
+                // Informação adicional se for imagem:
+                if (f.type.match('image.*')) {
+                  var reader = new FileReader();
+                  //A leitura do arquivo é assíncrona 
+                  reader.onload = (function(theFile) {
+                    return function(e) {
+            //              console.log('Img info', e, theFile);
+                      // Gera a miniatura:
+                      var img = document.createElement('img');
+                      img.src = e.target.result;
+                      img.title = escape(theFile.name);
+
+                      var span = document.createElement('span');
+                      //Obtém o tamanho:
+                      //Só é possível obter o tamanho do arquivo após o carregamento dele na miniatura, como o src é um base64 gerado à partir do arquivo local não terá custo de carregamento através da rede.
+                      img.onload = function(){
+                        var i = document.createElement('i');
+                      i.innerHTML = "<br>Tamanho Miniatura: " + img.width + "px Largura - " + img.height + "px Altura <br> Tamanho original:"+ img.naturalWidth+ "px Largura - " + img.naturalWidth+ "px Altura";
+                      span.appendChild(i);
+
+                      //Esse método retorna o tamanho calculado: Resultado esperado ((proporcional)x75) 
+
+                      //var width = img.clientWidth;
+                      //var height = img.clientHeight;
+                      }
+
+                      span.appendChild(img);
+                      document.getElementById('nome_arquivo').insertBefore(span, null);
+                    };
+                  })(f);
+
+                  // Read in the image file as a data URL.
+                  reader.readAsDataURL(f);
+                }
+
+                output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes,  última modificação: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+              }
+              document.getElementById('nome_arquivo').innerHTML = '<ul>' + output.join('') + '</ul>';
+            }
+
+            document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                       
+        </script>
+    </body>
+</html>

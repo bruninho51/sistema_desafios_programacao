@@ -1,13 +1,16 @@
 .container-enviar-enunciado{
-    margin-top: 25vh;
+    margin-top: 20vh;
 }
 
-.btn-control-file input[type='file'] {
-  opacity: 0;
+#file{
+  display: none;
   
 }
 
 .container p{
+    text-align: justify;
+}
+.container h1{
     text-align: center;
 }
 

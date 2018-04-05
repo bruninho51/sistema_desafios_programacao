@@ -3,6 +3,7 @@
     $title = 'Consultar Respostas';
     $page_css = 'consultaRespostas.css';
     $active_page = 'link_res_desafios_anteriores';
+    $bootstrap_version = "3.0";
 
 ?>
         <?php require_once('vw_menu.php') ?>

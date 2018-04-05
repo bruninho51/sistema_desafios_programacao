@@ -3,6 +3,7 @@
     $title = 'Adicionar Desafio';
     $page_css = 'addDesafio.css';
     $active_page = 'link_cadastrar_desafio';
+    $bootstrap_version = "3.0";
 
 ?>
         <?php require_once('vw_menu.php') ?>

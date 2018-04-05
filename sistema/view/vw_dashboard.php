@@ -2,6 +2,7 @@
     //VARIÁVEIS PARA A PÁGINA
     $title = 'Dashboard';
     $page_css = 'dashboard.css';
+    $bootstrap_version = "4.0";
 
 ?>      
         <?php require_once('vw_menu.php') ?>
